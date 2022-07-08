@@ -2,6 +2,7 @@ FROM rockylinux:8
 
 RUN \
  dnf install -y \
+     jq \
      iptables \
      python3-idna \
      python3-dateutil \

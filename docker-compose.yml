@@ -17,8 +17,11 @@ services:
       - VIRTUAL_HOST=vpn.helpmesee.org
       - VIRTUAL_PORT=843
       - VIRTUAL_PROTO=https
+      - OPENVPN_ADMIN_USER=openvpn
+      - OPENVPN_ADMIN_PASS=openvpn
     volumes:
       - ./as.conf:/usr/local/openvpn_as/etc/as.conf
+      - ./certs:/usr/local/openvpn_as/etc/web-ssl
       - ./config:/config
     ports:
       - 943:943
