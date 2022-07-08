@@ -9,16 +9,7 @@ services:
     container_name: openvpn-as
     cap_add:
       - NET_ADMIN
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      - INTERFACE=eth0 #optional
-      - VIRTUAL_HOST=vpn.helpmesee.org
-      - VIRTUAL_PORT=843
-      - VIRTUAL_PROTO=https
-      - OPENVPN_ADMIN_USER=openvpn
-      - OPENVPN_ADMIN_PASS=openvpn
+    env_file: openvpn_as.env
     volumes:
       - ./as.conf:/usr/local/openvpn_as/etc/as.conf
       - ./certs:/usr/local/openvpn_as/etc/web-ssl
