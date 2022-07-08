@@ -34,6 +34,9 @@ fi
 if [ -n ${VPN_SERVER_DHCP_OPTION_DOMAIN} ]; then
     ${SACLI} --key "vpn.server.dhcp_option.domain" --value "${VPN_SERVER_DHCP_OPTION_DOMAIN}" ConfigPut
 fi
+if [ -n ${VPN_SERVER_DHCP_OPTION_DNS_0} ]; then
+    ${SACLI} --key "vpn.server.dhcp_option.dns.0" --value "${VPN_SERVER_DHCP_OPTION_DNS_0}" ConfigPut
+fi
 if [ -n ${HOST_NAME} ]; then
     ${SACLI} --key "host.name" --value "${HOST_NAME}" ConfigPut
 fi
@@ -57,6 +60,9 @@ if [ -n ${AUTH_SAML_0_IDP_SIGNON_ENDPOINT} ]; then
 fi
 if [ -n ${AUTH_SAML_0_TIMEOUT} ]; then
     ${SACLI} --key "auth.saml.0.timeout" --value "${AUTH_SAML_0_TIMEOUT}" ConfigPut
+fi
+if [ -n ${AUTH_MODULE_TYPE} ]; then
+    ${SACLI} --key "auth.module.type" --value "${AUTH_MODULE_TYPE}" ConfigPut
 fi
 ${SACLI} start
 

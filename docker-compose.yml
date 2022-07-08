@@ -13,7 +13,6 @@ services:
     volumes:
       - ./as.conf:/usr/local/openvpn_as/etc/as.conf
       - ./certs:/usr/local/openvpn_as/etc/web-ssl
-      - ./config:/config
     ports:
       - 943:943
       - 843:843
