@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sleep 10
+sleep 15
 
 SACLI=/usr/local/openvpn_as/scripts/sacli
 
@@ -37,8 +37,26 @@ fi
 if [ -n ${HOST_NAME} ]; then
     ${SACLI} --key "host.name" --value "${HOST_NAME}" ConfigPut
 fi
-#if [ -n ${} ]; then
-#    ${SACLI} --key "" --value "${}" ConfigPut
-#fi
+if [ -n ${AUTH_SAML_0_IDP_ENTITYID} ]; then
+    ${SACLI} --key "auth.saml.0.idp_entityid" --value "${AUTH_SAML_0_IDP_ENTITYID}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_SP_HOSTNAME} ]; then
+    ${SACLI} --key "auth.saml.0.sp_hostname" --value "${AUTH_SAML_0_SP_HOSTNAME}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_IDP_LOGOUT_ENDPOINT} ]; then
+    ${SACLI} --key "auth.saml.0.idp_logout_endpoint" --value "${AUTH_SAML_0_IDP_LOGOUT_ENDPOINT}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_IDP_CERT} ]; then
+    ${SACLI} --key "auth.saml.0.idp_cert" --value "${AUTH_SAML_0_IDP_CERT}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_ENABLE} ]; then
+    ${SACLI} --key "auth.saml.0.enable" --value "${AUTH_SAML_0_ENABLE}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_IDP_SIGNON_ENDPOINT} ]; then
+    ${SACLI} --key "auth.saml.0.idp_signon_endpoint" --value "${AUTH_SAML_0_IDP_SIGNON_ENDPOINT}" ConfigPut
+fi
+if [ -n ${AUTH_SAML_0_TIMEOUT} ]; then
+    ${SACLI} --key "auth.saml.0.timeout" --value "${AUTH_SAML_0_TIMEOUT}" ConfigPut
+fi
 ${SACLI} start
 

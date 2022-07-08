@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+PIDFILE=/usr/local/openvpn_as/openvpnas.pid
+
 # Remove old PID
-if [ -f /usr/local/openvpn_as/scripts/twistd.pid ]; then
-    rm -f /usr/local/openvpn_as/scripts/twistd.pid
+if [ -f ${PIDFILE} ]; then
+    rm -f ${PIDFILE}
 fi
 
 if [ ! -f /dev/net/tun ]; then
@@ -12,6 +14,6 @@ fi
 
 /root/post_reqs.sh &
 
-/usr/local/openvpn_as/scripts/openvpnas -n --logfile=/var/log/openvpn.log
+/usr/local/openvpn_as/scripts/openvpnas -n --logfile=/var/log/openvpn.log --pidfile=${PIDFILE}
 
 
