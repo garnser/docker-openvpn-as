@@ -6,7 +6,7 @@ RUN \
      iptables \
      python3-idna \
      python3-dateutil \
-     iproute \
+     python3-requests \
      https://as-repository.openvpn.net/as-repo-rhel8.rpm
 
 RUN \
