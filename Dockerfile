@@ -14,6 +14,7 @@ RUN \
  openvpn-as
 
 COPY /root /
+COPY as.conf /usr/local/openvpn_as/etc/
 EXPOSE 943/tcp 1194/udp
 
 CMD [ "/root/start_openvpn.sh" ]

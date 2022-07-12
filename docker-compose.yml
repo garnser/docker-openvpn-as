@@ -9,11 +9,12 @@ services:
     container_name: openvpn-as
     cap_add:
       - NET_ADMIN
-    env_file: openvpn_as.env
+    environment:
+      - OPENVPN_ADMIN_USER=openvpn
+      - OPENVPN_ADMIN_PASS=openvpn
     volumes:
-      - ./as.conf:/usr/local/openvpn_as/etc/as.conf
       - ./certs:/usr/local/openvpn_as/etc/web-ssl
-      - ./utils/post_auth.py:/root/post_auth.py
+      - ./config.json:/root/config.json
     ports:
       - 943:943
       - 843:843
