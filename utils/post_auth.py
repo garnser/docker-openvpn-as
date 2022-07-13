@@ -17,6 +17,7 @@ def post_auth(authcred, attributes, authret, info):
 
     baseurl = 'https://fqdn'
     realm = 'master'
+    authorized = False
 
     auth_headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     auth_data = {'username': "username",
@@ -43,9 +44,12 @@ def post_auth(authcred, attributes, authret, info):
 
     for group in group_response.json():
         if group["name"] == "openvpn_users":
-            authret['status'] = FAIL
-            authret['reason'] = "unauthorized user"
-            authret['client_reason'] = "Unauthorized"
+            authorized = True
+
+    if not authorized:
+        authret['status'] = FAIL
+        authret['reason'] = "unauthorized user"
+        authret['client_reason'] = "Unauthorized"
 
     role_response = requests.get(baseurl + '/admin/realms/' + realm + '/users/' + user_id + '/role-mappings/realm',
                                  headers=x_headers)
