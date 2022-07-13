@@ -33,21 +33,26 @@ def post_auth(authcred, attributes, authret, info):
     x_headers = {'Accept': 'application/json',
                  'Authorization': 'Bearer ' + access_token}
 
-    user_response = requests.get(baseurl + '/admin/realms/' + realm + '/users?username=' + authcred["username"],
+    user_response = requests.get(baseurl + '/admin/realms/' + realm + '/users?username=' + authcred["username"] + '&exact=true',
                     headers=x_headers)
 
-    # Take first hit and hope it's right
-    # Loop through the response and make sure the name is ^name$
     user_id = user_response.json()[0]["id"]
+
+    group_response = requests.get(baseurl + '/admin/realms/' + realm + '/users/' + user_id + '/groups',
+                                 headers=x_headers)
+
+    for group in group_response.json():
+        if group["name"] == "openvpn_users":
+            authret['status'] = FAIL
+            authret['reason'] = "unauthorized user"
+            authret['client_reason'] = "Unauthorized"
 
     role_response = requests.get(baseurl + '/admin/realms/' + realm + '/users/' + user_id + '/role-mappings/realm',
                                  headers=x_headers)
 
     for role in role_response.json():
         if role["name"] == "role1":
-            group = "role1"
-        if role["name"] == "role2":
-            group = "role2"
+            group = role["name"]
 
     proplist_save['conn_group'] = group
 
