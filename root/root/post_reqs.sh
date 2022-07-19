@@ -35,7 +35,7 @@ fi
 
 # Provision groups
 if [ -f /root/groups.json ]; then
-    groups=$(jq -rc '. | . as $groups| keys_unsorted | map(select($groups[.].type=="group"))' /root/groups.json)
+    groups=$(jq -rc '. | . as $groups| keys_unsorted | map(select($groups[.].type=="group")) | .[]' /root/groups.json)
     
     for group in $groups; do
 	${SACLI} --user $group --key "type" --value "group" UserPropPut
