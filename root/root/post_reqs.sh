@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ "$OPENVPN_INIT" == "false" ]]; then
+    exit 0
+fi
+
 sleep 15
 
 SACLI=/usr/local/openvpn_as/scripts/sacli

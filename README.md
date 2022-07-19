@@ -10,8 +10,10 @@ OPENVPN_ADMIN_USER=openvpn
 OPENVPN_ADMIN_PASS=suersecretpassword
 ```
 
-## Overall configuration
+## Base configuration
 Copy `config.json.example` to `config.json` and make the appropiate changes to best suit your environment. This file will be loaded upon container start and update the configuration.
+
+Note that this method can become quite slow and is better suited for initial deployment or IaC controlled environments. To make things a bit quicker consider using Persistent configuration below instead.
 
 Make sure to add this to volumes definitions.
 

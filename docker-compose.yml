@@ -12,6 +12,7 @@ services:
     environment:
       - OPENVPN_ADMIN_USER=openvpn
       - OPENVPN_ADMIN_PASS=openvpn
+      - OPENVPN_INIT=true
     volumes:
       - ./certs:/usr/local/openvpn_as/etc/web-ssl
       - ./config.json:/root/config.json
