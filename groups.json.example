@@ -1,0 +1,24 @@
+{
+  "ovpn_dataaccess": {
+    "access_to.0": "+SUBNET:172.16.0.1/32:tcp/443",
+    "access_to.1": "+SUBNET:172.16.2.0/24",
+    "c2s_dest_s": "false",
+    "c2s_dest_v": "false",
+    "group_declare": "true",
+    "prop_autologin": "false",
+    "prop_deny": "false",
+    "prop_superuser": "false",
+    "type": "group",
+    "user_auth_type": "saml"
+  },
+  "ovpn_sysadmin": {
+    "access_to.0": "+SUBNET:192.168.0.0/24",
+    "c2s_dest_s": "false",
+    "c2s_dest_v": "false",
+    "group_declare": "true",
+    "prop_autologin": "false",
+    "prop_deny": "false",
+    "prop_superuser": "true",
+    "type": "group"
+  }
+}

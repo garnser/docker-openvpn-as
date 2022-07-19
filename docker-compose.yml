@@ -15,6 +15,7 @@ services:
     volumes:
       - ./certs:/usr/local/openvpn_as/etc/web-ssl
       - ./config.json:/root/config.json
+      - ./groups.json:/root/groups.json
     ports:
       - 943:943
       - 843:843
