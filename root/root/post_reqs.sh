@@ -24,6 +24,7 @@ if [[ $(mount | grep -q '/usr/local/openvpn_as/etc/web-ssl') ]]; then
     ${SACLI} --import GetActiveWebCerts
 fi
 
+# Provision config
 if [ -f /root/config.json ]; then
     keys=$(jq -rc '. | keys[] as $k | $k' /root/config.json)
     for key in $keys; do
@@ -31,5 +32,20 @@ if [ -f /root/config.json ]; then
 	${SACLI} --key "${key}" --value "${value}" ConfigPut
     done
 fi
+
+# Provision groups
+if [ -f /root/groups.json ]; then
+    groups=$(jq -rc '. | . as $groups| keys_unsorted | map(select($groups[.].type=="group"))' /root/groups.json)
+    
+    for group in $groups; do
+	${SACLI} --user $group --key "type" --value "group" UserPropPut
+	${SACLI} --user $group --key "group_declare" --value "true" UserPropPut
+	while IFS=, read -r key value;  do
+	    ${SACLI} --user $group --key "$key" --value "$value" UserPropPut
+	done < <(jq -rc --arg group "$group" '.[$group] | to_entries[] | [.key, .value] | @csv' /root/groups.json | tr -d '"' | grep -v 'type,group')
+    done
+fi
+
+    
 ${SACLI} start
 
